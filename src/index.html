@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- PON UN FAVICON!!! -->
+    <link rel="icon" type="image/svg+xml" href="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Password generator</title>
+  </head>
+
+  <body>
+    <main class="main">
+      <div class="password-generator-container">
+        <div class="password-container">
+          <span class="password" id="password">P4$5W0RD!</span>
+        </div>
+
+        <div class="length-container">
+          <label for="range" id="range-label" class="range-label">LENGTH: 16</label>
+        </div>
+
+        <div class="range-container">
+          <span>4</span>
+          <input type="range" id="range" class="range-input" min="4" max="32" value="16" />
+          <span>32</span>
+        </div>
+
+        <button id="generate-password-button" class="generate-password-button">Generate Password</button>
+      </div>
+    </main>
+    <script type="module" src="./js/index.js"></script>
+  </body>
+</html>

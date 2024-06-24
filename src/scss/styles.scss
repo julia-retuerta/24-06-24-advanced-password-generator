@@ -1,0 +1,14 @@
+@use 'base/normalize.scss';
+@use 'base/initial-reset.scss';
+@use 'config/variables.scss';
+@use 'blocks/body.scss';
+@use 'blocks/main.scss';
+@use 'blocks/password-generator-container.scss';
+@use 'blocks/password-container.scss';
+@use 'blocks/length-container.scss';
+@use 'blocks/range-container.scss';
+@use 'blocks/range-input.scss';
+@use 'blocks/generate-password-button.scss';
+@use 'blocks/titles.scss';
+@use 'blocks/texts.scss';
+
