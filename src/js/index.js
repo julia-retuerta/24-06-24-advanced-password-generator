@@ -26,8 +26,60 @@ const rangeLabelElement = document.getElementById('range-label');
 const rangeInputElement = document.getElementById('range');
 const generatePasswordButtonElement = document.getElementById('generate-password-button');
 
+const upperCaseInputElement = document.getElementById('uppercase');
+const lowerCaseInputElement = document.getElementById('lowercase');
+const numbersInputElement = document.getElementById('numbers');
+const symbolsInputElement = document.getElementById('symbols');
+
+const passwordOptions = {
+  uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+  lowercase: 'abcdefghijklmnopqrstuvwxyz',
+  numbers: '0123456789',
+  symbols: '!@#$%^&*()_+-={}[]:;<>,.?/'
+};
+
 let passwordLength = rangeInputElement.value;
+let allowedCharacters = '';
 let finalPassword = '';
+
+// ! = lo contrario de
+// valor inverso
+const setDisabledButton = () => {
+  generatePasswordButtonElement.disabled = !allowedCharacters.length;
+};
+
+const fillAllowedCharacters = () => {
+  let allowedCharacters = '';
+  const checkboxes = document.querySelectorAll('input:checked');
+
+  checkboxes.forEach(input => (allowedCharacters += passwordOptions[input.id]));
+
+  console.log(allowedCharacters);
+
+  setDisabledButton();
+};
+
+// coge el id
+/* const fillAllowedCharacters = () => {
+  let allowedCharacters = '';
+  if (upperCaseInputElement.checked) {
+    allowedCharacters += upperCaseCharacters;
+  }
+
+  if (lowerCaseInputElement.checked) {
+    allowedCharacters += lowerCaseCharacters;
+  }
+
+  if (numbersCharacters.checked) {
+    allowedCharacters += numbersCharacters;
+  }
+
+  if (symbolsCharacters.checked) {
+    allowedCharacters += symbolsCharacters;
+  }
+
+  console.log(allowedCharacters);
+}; */
 
 const updateLabel = () => {
   passwordLength = rangeInputElement.value;
@@ -37,23 +89,47 @@ const updateLabel = () => {
 rangeInputElement.addEventListener('input', updateLabel);
 
 const optionsChecked = () => {
-  const inputElements = document.querySelectorAll('input[type="checkbox"]:checked');
+  if (upperCaseInputElement.checked) {
+    allowedCharacters.push(upperCaseCharacters);
+  } else {
+  }
 };
 
 generatePasswordButtonElement.addEventListener('click', optionsChecked);
 
+// función que se encarga de generar una posición aleatoria
+const generateRandomPosition = () => {
+  const randomPosition = Math.floor(Math.random() * availableCharacters.length);
+  return randomPosition;
+};
+
+// función que se encarga de generar el carácter aleatorio
+const getRandomCharacter = () => {
+  const randomPosition = generateRandomPosition();
+  const randomCharacter = availableCharacters.charAt(randomPosition);
+  return randomCharacter;
+};
+
+// función que se encarga de generar el bucle
 const generatePassword = () => {
   finalPassword = '';
   for (let i = 0; i < passwordLength; i++) {
-    const randomPosition = Math.floor(Math.random() * availableCharacters.length);
-    const randomCharacter = availableCharacters.charAt(randomPosition);
+    const randomCharacter = getRandomCharacter();
     finalPassword += randomCharacter;
   }
 
+  // función que se encarga de escribir el final password
   passwordElement.textContent = finalPassword;
 };
 
 generatePasswordButtonElement.addEventListener('click', generatePassword);
+
+upperCaseInputElement.addEventListener('change', fillAllowedCharacters);
+lowerCaseInputElement.addEventListener('change', fillAllowedCharacters);
+numbersInputElement.addEventListener('change', fillAllowedCharacters);
+symbolsInputElement.addEventListener('change', fillAllowedCharacters);
+
+//finalPassword = ''; esto sirve para que cada vez que se pulsa el botón, se vacíe el campo de la ccontraseña y se genere una nueva.
 
 /* const checkboxButtonElement = document.getElementById('checkbox-button');
 const checkboxInfoElement = document.getElementById('checkbox-info');
