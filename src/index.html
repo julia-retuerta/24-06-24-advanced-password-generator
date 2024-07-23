@@ -20,7 +20,7 @@
     <main class="main">
       <div class="password-generator-container">
         <div class="password-container">
-          <span class="password" id="password">P4$5W0RD!</span>
+          <span id="password" class="password">P4$5W0RD!</span>
         </div>
 
         <div class="length-container">
@@ -33,29 +33,33 @@
           <span>32</span>
         </div>
 
-        <div id="include-options" class="include-options-container">
-          <div class="input-field">
-            <label for="uppercase" class="include-options-label">Include Uppercase</label>
-            <input type="checkbox" id="uppercase" class="include-options-input" />
+        <div class="include-options">
+          <div class="include-options__subcontainer">
+            <span class="include-options__text">Include Uppercase</span>
+            <input type="checkbox" id="uppercase" class="include-options__input" />
+            <label for="uppercase" class="include-options__label"></label>
           </div>
 
-          <div class="input-field">
-            <label for="lowercase" class="include-options-label">Include Lowercase</label>
-            <input type="checkbox" id="lowercase" class="include-options-input" />
+          <div class="include-options__subcontainer">
+            <span class="include-options__text">Include Lowercase</span>
+            <input type="checkbox" id="lowercase" class="include-options__input" />
+            <label for="lowercase" class="include-options__label"></label>
           </div>
 
-          <div class="input-field">
-            <label for="numbers" class="include-options-label">Include Numbers</label>
-            <input type="checkbox" id="numbers" class="include-options-input" />
+          <div class="include-options__subcontainer">
+            <span class="include-options__text">Include Numbers</span>
+            <input type="checkbox" id="numbers" class="include-options__input" />
+            <label for="numbers" class="include-options__label"></label>
           </div>
 
-          <div class="input-field">
-            <label for="symbols" class="include-options-label">Include Symbols</label>
-            <input type="checkbox" id="symbols" class="include-options-input" />
+          <div class="include-options__subcontainer">
+            <span class="include-options__text">Include Symbols</span>
+            <input type="checkbox" id="symbols" class="include-options__input" />
+            <label for="symbols" class="include-options__label"></label>
           </div>
         </div>
 
-        <button disabled id="generate-password-button" class="generate-password-button">Generate Password</button>
+        <button id="generate-password-button" class="generate-password-button" disabled>Generate Password</button>
       </div>
     </main>
     <script type="module" src="./js/index.js"></script>

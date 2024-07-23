@@ -1,0 +1,48 @@
+@use '../mixins/pseudo.scss' as *;
+
+.include-options {
+  width: 100%;
+
+  &__subcontainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    margin-bottom: 1rem;
+    padding: 20px;
+    border-radius: 0.5rem;
+    background-color: #241442;
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 75px;
+    height: 40px;
+    border-radius: 2rem;
+    background-color: grey;
+    transition: background-color 0.3s;
+
+    &::after {
+      @include pseudo(30px, 30px) {
+        left: 8px;
+        border-radius: 50%;
+        background-color: #fff;
+        transition: translate 0.3s;
+      }
+    }
+  }
+}
+
+.include-options__input:checked + .include-options__label {
+  background-color: #7400e4;
+}
+
+.include-options__input:checked + .include-options__label::after {
+  translate: 100%;
+}

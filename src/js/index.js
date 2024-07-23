@@ -4,8 +4,8 @@ import '../scss/styles.scss';
 // EXPLICACIONES
 
 // const generatePassword -> función que se encarga de generar el bucle
-//  const randomPosition y  const randomCharacter -> función que se encarga de generar el carácter aleatorio
-// finalPassword = ''; -> sirve para que, cada vez que se pulsa el botón, se vacíe el campo de la ccontraseña y se genere una nueva.
+// const randomPosition y const randomCharacter -> función que se encarga de generar el carácter aleatorio
+// finalPassword = ''; -> sirve para que, cada vez que se pulsa el botón, se vacíe el campo de la contraseña y se genere una nueva.
 // passwordElement.textContent = finalPassword -> función que se encarga de escribir el final password
 
 // PASOS
@@ -13,7 +13,7 @@ import '../scss/styles.scss';
 //Sincronizar el length del nuevo password con el input range
 //Que al cambiar el range, se refleje en el length
 //Que al darle al botón de generar contraseña, genere una contraseña
-//Que al darle al botón de generar contraseña, se genere una contrseña de la longitud que le hemos dicho
+//Que al darle al botón de generar contraseña, se genere una contraseña de la longitud que le hemos dicho
 
 const availableCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890!@#$%^&*()_+-={}[]:;<>,.?/';
 const upperCaseCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -31,6 +31,7 @@ const lowerCaseInputElement = document.getElementById('lowercase');
 const numbersInputElement = document.getElementById('numbers');
 const symbolsInputElement = document.getElementById('symbols');
 
+// objeto que mapea los ids de los checkboxes a sus respectivos conjuntos de caracteres
 const passwordOptions = {
   uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
   lowercase: 'abcdefghijklmnopqrstuvwxyz',
@@ -38,24 +39,30 @@ const passwordOptions = {
   symbols: '!@#$%^&*()_+-={}[]:;<>,.?/'
 };
 
+// almacena la longitud de la contraseña
 let passwordLength = rangeInputElement.value;
 let allowedCharacters = '';
 let finalPassword = '';
 
-// ! = lo contrario de
-// valor inverso
+// ! = lo contrario de, valor inverso
+// si allowedCharacters está vacío se deshabilita el botón
 const setDisabledButton = () => {
   generatePasswordButtonElement.disabled = !allowedCharacters.length;
 };
 
 const fillAllowedCharacters = () => {
-  let allowedCharacters = '';
+  // Reinicia la cadena de caracteres permitidos para que cada vez que se llama a la función allowedCharacters se reconstruya desde cero, en lugar de agregar caracteres a una cadena existente.
+  allowedCharacters = '';
+  // Selecciona todos los checkboxes que están marcados
   const checkboxes = document.querySelectorAll('input:checked');
 
+  // Itera sobre cada checkbox marcado
+  // Agrega los caracteres correspondientes al tipo de checkbox marcado
+  // Para cada checkbox marcado, accede a su id (input.id) y utiliza ese id para obtener el conjunto correspondiente de caracteres desde passwordOptions (passwordOptions[input.id]).
+  // Agrega estos caracteres a allowedCharacters usando el operador +=, que concatena los nuevos caracteres a la cadena existente.
   checkboxes.forEach(input => (allowedCharacters += passwordOptions[input.id]));
 
-  console.log(allowedCharacters);
-
+  // Llama a la función para habilitar o deshabilitar el botón de generación de contraseña
   setDisabledButton();
 };
 
@@ -88,25 +95,16 @@ const updateLabel = () => {
 
 rangeInputElement.addEventListener('input', updateLabel);
 
-const optionsChecked = () => {
-  if (upperCaseInputElement.checked) {
-    allowedCharacters.push(upperCaseCharacters);
-  } else {
-  }
-};
-
-generatePasswordButtonElement.addEventListener('click', optionsChecked);
-
-// función que se encarga de generar una posición aleatoria
+// función que se encarga de generar una posición aleatoria dentro de allowedCharacters
 const generateRandomPosition = () => {
-  const randomPosition = Math.floor(Math.random() * availableCharacters.length);
+  const randomPosition = Math.floor(Math.random() * allowedCharacters.length);
   return randomPosition;
 };
 
 // función que se encarga de generar el carácter aleatorio
 const getRandomCharacter = () => {
   const randomPosition = generateRandomPosition();
-  const randomCharacter = availableCharacters.charAt(randomPosition);
+  const randomCharacter = allowedCharacters.charAt(randomPosition);
   return randomCharacter;
 };
 
@@ -128,8 +126,6 @@ upperCaseInputElement.addEventListener('change', fillAllowedCharacters);
 lowerCaseInputElement.addEventListener('change', fillAllowedCharacters);
 numbersInputElement.addEventListener('change', fillAllowedCharacters);
 symbolsInputElement.addEventListener('change', fillAllowedCharacters);
-
-//finalPassword = ''; esto sirve para que cada vez que se pulsa el botón, se vacíe el campo de la ccontraseña y se genere una nueva.
 
 /* const checkboxButtonElement = document.getElementById('checkbox-button');
 const checkboxInfoElement = document.getElementById('checkbox-info');
